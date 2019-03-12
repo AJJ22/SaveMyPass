@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="/js/login.js"></script>
+	<script type="text/javascript" src="/js/oauth.js"></script>
+	<link rel="stylesheet" href="/css/default.css">
+<style>
+h2{
+	text-align: center;
+}
+
+#submit{
+	text-align: center;
+}
+
+#username, #password{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+</style>
+</head>
+	<body>
+		<h2>SaveMyPass</h2>
+		<input type="text" id="username" placeholder="Username"></input>
+		<input type="text" id="password" placeholder="Password"></input>
+		<div id="submit"><input type="submit" id="btn-login" value="Login"></input></div>
+	</body>
+</html>

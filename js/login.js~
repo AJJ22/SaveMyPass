@@ -1,0 +1,23 @@
+/*function signin(){
+	alert("clicked login");
+	var username = document.getElementById("username");
+	var password = document.getElementById("password");
+	if(username == "austin" && password == "12345"){
+		alert("success!");
+		window.location = "home.html";
+	}
+}
+*/
+
+$(document).ready(function(){
+	$("btn-login").click(function(e){
+		e.preventDefault();
+		alert("click!");
+	});
+});
+
+
+
+//chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  // Use the token.
+//});

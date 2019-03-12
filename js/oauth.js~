@@ -1,0 +1,22 @@
+ window.onload = function() {
+    document.querySelector('button').addEventListener('click', function() {
+      chrome.identity.getAuthToken({interactive: true}, function(token) {
+        let init = {
+          method: 'GET',
+          async: true,
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          },
+          'contentType': 'json'
+        };
+        fetch(
+            'https://people.googleapis.com/v1/contactGroups/all?maxMembers=20&key=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmeybG4Q1WXCLsMw0zPaBqi2f02sNSXEwDn8bH0G1TqqLtO0IRKXlXpRVYPiAP3vyeLya6VgjbXhSBI9JSidS5RS5hLDTiXhwQN/+8oVH3FLBF6mDfhN0AJKmC68PahD6dP/bx2VX4DqUeSDBH3mI3QmbiY+I4RsI5pSRc0133Ego4PawlOJuNbPPjHYqXdwxK80tqqZxSJtjhK2iHUNEN2SHWG4KS6E5NqmsvpxoZCSWQBhx2omOfpggGTjbIKEgULJQLWEYmsvu6YAPdsbpB49sZ5A/x4udI1WecwYumWKgWB3oFSpwuvcEBeldMPvLCcRahIPC469zvAHFhHNhqQIDAQAB',
+            init)
+            .then((response) => response.json())
+            .then(function(data) {
+              console.log(data)
+            });
+      });
+    });
+  };
