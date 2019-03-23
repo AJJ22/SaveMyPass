@@ -4,7 +4,7 @@
 	"description": "Create a useful tool that will help eliminate the worries of remembering and managing passwords by yourself.",
 	"manifest_version": 2,
 	"author":"Austin Jerich",
-	"permissions": ["identity", "storage", "https://www.google.com/*", "tabs", "https://www.facebook.com/*"],
+	"permissions": ["identity", "storage", "tabs", "https://*/*"],
 
 	"background":{
 		"scripts": [
