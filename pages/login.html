@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
 	<!--<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>-->
 
-	<meta name="google-signin-client_id" content="1976054582-cjejnq5eh1scdel7cihet5i558rb0evq.apps.googleusercontent.com">
-	<meta name="google-signin-client_id" content="1976054582-hpuatjqeefol954ikeo8dtean05ug1vl.apps.googleusercontent.com"> <!-- google signin-client_id -->
+	<!--<meta name="google-signin-client_id" content="1976054582-cjejnq5eh1scdel7cihet5i558rb0evq.apps.googleusercontent.com">-->
+	<!--<meta name="google-signin-client_id" content="1976054582-hpuatjqeefol954ikeo8dtean05ug1vl.apps.googleusercontent.com"> --><!-- google signin-client_id -->
 	
-	<script type="text/javascript" src="/js/oauth.js"></script>
+	<script type="text/javascript" src="/js/login.js"></script>
 	<link rel="stylesheet" href="/css/default.css">
 <style>
 h2{
 	text-align: center;
+	margin: 0;
 }
 
 #submit{
@@ -23,12 +24,16 @@ h2{
 	margin-right: auto;
 	margin-left: auto;
 }
+#register{
+	position:absolute; top:0; right:0;
+}
 </style>
 </head>
 	<body>
 		<h2>SaveMyPass</h2>
-		<!--<input type="text" id="username" placeholder="Username"></input>
-		<input type="password" id="password" placeholder="Password"></input>-->
+		<a href="createUserPass.html" id="register"><button>Register</button></a>
+		<input type="text" id="username" placeholder="Username"></input>
+		<input type="password" id="password" placeholder="Password"></input>
 		<div id="submit"><input type="submit" id="btn-login" value="Login"></input></div>
 		<div class="g-signin2" data-onsuccess="onSignIn"></div>
 		
