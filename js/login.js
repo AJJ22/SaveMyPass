@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-	document.querySelector('#submit').addEventListener('click', signin);
+	document.querySelector('#loginSubmit').addEventListener('click', signin);
 });
 
 function signin(){
@@ -8,11 +8,12 @@ function signin(){
 	var inputedPassword = document.getElementById("password").value;
 	//onsole.log(username);
 	//console.log(password);
-	
+		
 	var loggedPassword = localStorage.getItem(inputedUsername);
 	
 	if(inputedPassword == loggedPassword){
 		console.log("success!");
+		masterPassword = loggedPassword;
 		window.location = "home.html";
 	}
 	else{
