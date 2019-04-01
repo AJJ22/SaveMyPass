@@ -1,0 +1,2 @@
+var masterPassword;
+var masterUsername;

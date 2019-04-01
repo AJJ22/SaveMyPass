@@ -16,7 +16,7 @@ function autoLogin() {
 		var encryptedPass = newCreds[2];
 		var url = newCreds[0];
 		
-		var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, masterPassword);
+		var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, data.masterPassword);
 		decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
 
 		console.log(username);
