@@ -1,4 +1,5 @@
-  chrome.browserAction.onClicked.addListener(function() {
-    //chrome.tabs.create({url: 'index.html'});
-    alert("test");
-  });
+chrome.runtime.onMessage.addListener(function(msg, sender) {
+	if (msg.from === 'login') {
+		console.log("got msg from login.js!");
+	}
+});

@@ -16,20 +16,14 @@ function signin(){
 	if(inputedPassword == loggedPassword){
 		console.log("success!");
 		
-		console.log(data);
-		data.masterPassword = inputedPassword;
-		console.log(data.masterPassword);
+		//console.log(data);
+		//masterPassword = inputedPassword;
+		//console.log(masterPassword);
 		
-		fs = require('fs');
-		fh = fopen("variables.json", 0); // Open the file for reading
-		if(fh != -1){
-			length = flength(fh);        // Get the length of the file
-			str = fread(fh, length);     // Read in the entire file
-			fclose(fh);                  // Close the file
-			 
-			// Display the contents of the file
-			write(str);
-		}
+		chrome.runtime.sendMessage({
+			from: 'login',
+			subject: "sendVar"
+		});
 		
 		window.location = "home.html";
 	}
