@@ -7,14 +7,12 @@
 	"permissions": ["identity", "storage", "tabs", "activeTab"],
 
 	"background":{
-		"scripts": [
-			"js/background.js"
-		],
+		"scripts": ["js/background.js"],
 		"persistent": false
 	},
 	
 	"content_security_policy": "script-src 'self' https://apis.google.com https://cdnjs.cloudflare.com; object-src 'self'",
-
+	
 	"browser_action": {
 		"default_popup": "pages/login.html",
 		"default_icon": "images/icon_48.png"

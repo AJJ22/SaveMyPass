@@ -1,2 +1,0 @@
-var masterPassword;
-var masterUsername;
