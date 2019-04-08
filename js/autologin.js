@@ -13,6 +13,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender) {
 	if (msg.from === "background") {
 		U = msg.user
 		P = msg.pass
+		document.getElementById("name").innerHTML = U;
 	}
 });
 
