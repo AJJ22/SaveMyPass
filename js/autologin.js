@@ -23,7 +23,6 @@ function autoLogin() {
 	
 	chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
 		var url = tabs[0].url;
-		//console.log(url);
 	
 		//get values of current URL
 		var creds = localStorage.getItem(url);
@@ -41,10 +40,6 @@ function autoLogin() {
 			if(masterUser === loggedInUser){
 				var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, loggedInPass);
 				decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
-
-				//console.log(username);
-				//console.log(encryptedPass);
-				//console.log(decryptedPass);
 				
 				//FACEBOOK
 				if(url == "https://www.facebook.com/"){

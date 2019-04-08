@@ -25,10 +25,8 @@ function addCred(){
 	var username = document.getElementById("newUser").value;
 	var passwordA = document.getElementById("newPass").value;
 	
-	//encrypt password maybe username?
+	//encrypt with master password
 	var encryptedPass = CryptoJS.AES.encrypt(passwordA, masterPass);
 	
-	//TODO: this might fail because im getting the key, not the value
-	//I need the value!
 	localStorage.setItem(login, [login, username, encryptedPass, masterUser]);
 }

@@ -21,8 +21,6 @@ function createUserPass() {
 	var confirmPass = document.getElementById("pass2").value;
 	
 	if(pass == confirmPass){
-		//i can hash this instead of encrypting it
-		//var encryptedPass = CryptoJS.AES.encrypt(pass, "12345");
 		hashedPass = pass.hashCode();
 		localStorage.setItem(username, [hashedPass]);
 	}
