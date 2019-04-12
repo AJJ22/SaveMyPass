@@ -16,73 +16,54 @@ chrome.runtime.onMessage.addListener(function(msg, sender) {
 	}
 });
 
-/*
-function addRow(content,morecontent){
-	//if (!document.getElementsByTagName) return;
-	
+
+function addRow(url, username, decryptedPass){
 	tabBody = document.getElementsByTagName("tbody").item(0);
+	
 	row = document.createElement("tr");
 	cell1 = document.createElement("td");
 	cell2 = document.createElement("td");
-	textnode1 = document.createTextNode(content);
-	textnode2 = document.createTextNode(morecontent);
+	cell3 = document.createElement("td");
+	
+	textnode1 = document.createTextNode(username);
+	textnode2 = document.createTextNode(decryptedPass);
+	textnode3 = document.createTextNode(url);
+	
+	cell3.appendChild(textnode3);
 	cell1.appendChild(textnode1);
 	cell2.appendChild(textnode2);
+	
+	row.appendChild(cell3);
 	row.appendChild(cell1);
 	row.appendChild(cell2);
+	
 	tabBody.appendChild(row);
-}*/
+}
 
 function showCredentials(){
 	var passwor = document.getElementById("password").value;
 
 	if(passwor == masterPass){
-
-		//get passwords from local storage and output to page
-		
-		//tabBody = document.getElementsByTagName("tbody").item(0);
-		
-		//var new_tbody = document.createElement('tbody');
-		//populate_with_new_rows(new_tbody);
-		//old_tbody.parentNode.replaceChild(new_tbody, tabBody);
-				
-		
+		//loop through all things stored in localStorage
 		for(var i=0; i<localStorage.length; i++){
-			//console.log(i);
+			//get array from storage
 			var key = localStorage.key(i);
 			var creds = localStorage.getItem(key);
 			newCreds = creds.split(",");
 			
 			if(newCreds.length > 2){
+				//get credentials out of array
 				var url = newCreds[0];
 				var username = newCreds[1];
 				var encryptedPass = newCreds[2];
 				var masterUsername = newCreds[3];
 				
 				if(masterUser == masterUsername){
+					//decrypt password and create new row for creds
 					var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, masterPass);
 					decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
 					
-					tabBody = document.getElementsByTagName("tbody").item(0);
-					
-					row = document.createElement("tr");
-					cell1 = document.createElement("td");
-					cell2 = document.createElement("td");
-					cell3 = document.createElement("td");
-					
-					textnode1 = document.createTextNode(username);
-					textnode2 = document.createTextNode(decryptedPass);
-					textnode3 = document.createTextNode(url);
-					
-					cell3.appendChild(textnode3);
-					cell1.appendChild(textnode1);
-					cell2.appendChild(textnode2);
-					
-					row.appendChild(cell3);
-					row.appendChild(cell1);
-					row.appendChild(cell2);
-					
-					tabBody.appendChild(row);
+					addRow(url, username, decryptedPass);
 				}
 			}
 		}
