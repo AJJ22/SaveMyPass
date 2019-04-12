@@ -57,30 +57,33 @@ function showCredentials(){
 				var url = newCreds[0];
 				var username = newCreds[1];
 				var encryptedPass = newCreds[2];
+				var masterUsername = newCreds[3];
 				
-				var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, masterPass);
-				decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
-				
-				tabBody = document.getElementsByTagName("tbody").item(0);
-				
-				row = document.createElement("tr");
-				cell1 = document.createElement("td");
-				cell2 = document.createElement("td");
-				cell3 = document.createElement("td");
-				
-				textnode1 = document.createTextNode(username);
-				textnode2 = document.createTextNode(decryptedPass);
-				textnode3 = document.createTextNode(url);
-				
-				cell3.appendChild(textnode3);
-				cell1.appendChild(textnode1);
-				cell2.appendChild(textnode2);
-				
-				row.appendChild(cell3);
-				row.appendChild(cell1);
-				row.appendChild(cell2);
-				
-				tabBody.appendChild(row);
+				if(masterUser == masterUsername){
+					var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, masterPass);
+					decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
+					
+					tabBody = document.getElementsByTagName("tbody").item(0);
+					
+					row = document.createElement("tr");
+					cell1 = document.createElement("td");
+					cell2 = document.createElement("td");
+					cell3 = document.createElement("td");
+					
+					textnode1 = document.createTextNode(username);
+					textnode2 = document.createTextNode(decryptedPass);
+					textnode3 = document.createTextNode(url);
+					
+					cell3.appendChild(textnode3);
+					cell1.appendChild(textnode1);
+					cell2.appendChild(textnode2);
+					
+					row.appendChild(cell3);
+					row.appendChild(cell1);
+					row.appendChild(cell2);
+					
+					tabBody.appendChild(row);
+				}
 			}
 		}
 	}
