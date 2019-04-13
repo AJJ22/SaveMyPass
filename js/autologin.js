@@ -28,20 +28,30 @@ function autoLogin() {
 		//get values of current URL
 		var creds = localStorage.getItem(url);
 		if(creds != null){
-			console.log(creds);
+			//console.log(creds);
 			newCreds = creds.split(",");
 			var url = newCreds[0];
 			var username = newCreds[1];
 			var encryptedPass = newCreds[2];
 			var masterUser = newCreds[3];
 			
-			console.log(masterUser);
-			console.log(loggedInUser);
+			//console.log(masterUser);
+			//console.log(loggedInUser);
 			
 			if(masterUser === loggedInUser){
 				var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, loggedInPass);
 				decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
 				
+				
+				var possibleUserInputField = chrome.tabs.executeScript(tabs[0].id, {code:'var x = document.getElementsByTagName("input"); x'}, function(results){return results;});
+				//var possibleUserInputField = chrome.tabs.executeScript(tabs[0].id, {code: 'var inputFields = document.getElementsByTagName("input"); return inputFields'});
+				console.log(possibleUserInputField.item(0));
+				
+				
+				
+				
+				
+				/*
 				//FACEBOOK
 				if(url == "https://www.facebook.com/"){
 					//find username field and input username
@@ -89,6 +99,7 @@ function autoLogin() {
 				else{
 					console.log("ERROR: site credential locations not recorded. please ask austin about it. (^:");
 				}
+				*/
 			}
 			else{
 				console.log("could not find any credentials under your usernames");
