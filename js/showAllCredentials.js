@@ -53,17 +53,17 @@ function showCredentials(){
 			
 			if(newCreds.length > 2){
 				//get credentials out of array
-				var url = newCreds[0];
-				var username = newCreds[1];
-				var encryptedPass = newCreds[2];
-				var masterUsername = newCreds[3];
+				//var url = newCreds[0];
+				var username = newCreds[0];
+				var encryptedPass = newCreds[1];
+				var masterUsername = newCreds[2];
 				
 				if(masterUser == masterUsername){
 					//decrypt password and create new row for creds
 					var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, masterPass);
 					decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
 					
-					addRow(url, username, decryptedPass);
+					addRow(key, username, decryptedPass);
 				}
 			}
 		}

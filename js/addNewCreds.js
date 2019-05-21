@@ -11,7 +11,6 @@ chrome.runtime.sendMessage({
 
 chrome.runtime.onMessage.addListener(function(msg, sender) {
 	if (msg.from === "background") {
-		console.log("recieving from background")
 		MU = msg.user
 		MP = msg.pass
 	}
@@ -28,5 +27,5 @@ function addCred(){
 	//encrypt with master password
 	var encryptedPass = CryptoJS.AES.encrypt(passwordA, masterPass);
 	
-	localStorage.setItem(login, [login, username, encryptedPass, masterUser]);
+	localStorage.setItem(login, [username, encryptedPass, masterUser]);
 }

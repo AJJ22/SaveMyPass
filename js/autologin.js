@@ -27,30 +27,119 @@ function autoLogin() {
 	
 		//get values of current URL
 		var creds = localStorage.getItem(url);
+		
 		if(creds != null){
-			//console.log(creds);
+			//put the username, password, and masterUser into variables from the array0
 			newCreds = creds.split(",");
-			var url = newCreds[0];
-			var username = newCreds[1];
-			var encryptedPass = newCreds[2];
-			var masterUser = newCreds[3];
+			var username = newCreds[0];
+			var encryptedPass = newCreds[1];
+			var masterUser = newCreds[2];
 			
-			//console.log(masterUser);
-			//console.log(loggedInUser);
 			
 			if(masterUser === loggedInUser){
 				var decryptedPass = CryptoJS.AES.decrypt(encryptedPass, loggedInPass);
 				decryptedPass = decryptedPass.toString(CryptoJS.enc.Utf8);
 				
 				
-				var possibleUserInputField = chrome.tabs.executeScript(tabs[0].id, {code:'var x = document.getElementsByTagName("input"); x'}, function(results){return results;});
-				//var possibleUserInputField = chrome.tabs.executeScript(tabs[0].id, {code: 'var inputFields = document.getElementsByTagName("input"); return inputFields'});
-				console.log(possibleUserInputField.item(0));
+				//facebook: W
+				//battle.net: W
+				//ebay: W
+				//amazon: F (hidden input between)
+				//efollett: F (hidden input between)
+				//adobe: ?
+				
+				////////////////THIRD VERSION//////////////////
+				//FIND PASSWORD FIELD
+				
+				chrome.tabs.executeScript(null,{
+					code: 'Array.from(document.getElementsByTagName("input")).map(h => [h.id, h.type])'
+				},
+				function (results){
+					//go through all ID's of input tags
+					console.log(results[0]);
+					for(var i=0; i<results[0].length; i++){
+						//1st dimension: ignore getting the array, always 0
+						//2nd deminsion: pair of (ID, type), should be i
+						//3rd dimension: (0: ID, 1: type)
+						
+						if(results[0][i][1] == "password"){
+							//console.log(results[0][i]);
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i-1][0] + '").value = "' + username      + '";'});
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i  ][0] + '").value = "' + decryptedPass + '";'});
+						}
+						
+						if(results[0][i][1] == "submit"){
+							//console.log(results[0][i]);
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i][0] + '").click();'});
+						}
+					}
+				});
+				//find button tags if login was not an input tag
+				chrome.tabs.executeScript(null,{
+					code: 'Array.from(document.getElementsByTagName("button")).map(h => [h.id, h.type])'
+				},
+				function (results){
+					//console.log(results[0]);
+					for(var i=0; i<results[0].length; i++){
+						if(results[0][i][1] == "submit"){
+							//console.log(results[0][i]);
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i][0] + '").click();'});
+						}
+					}
+				});
 				
 				
 				
 				
+				////////////////SECOND VERSION//////////////////
+				/*
+				//USERNAME FIELD
+				chrome.tabs.executeScript(null,{
+					code: 'Array.from(document.getElementsByTagName("input")).map(h => h.id)'
+				},
+				function (results){
+					//go through all ID's of input tags
+					for(var i=0; i<results[0].length; i++){
+						//if any look like email/username field then input username
+						if(results[0][i] == "email" || results[0][i] == "ap_email"){
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i] + '").value = "' + username + '";'});
+						}
+					}
+				});
+
+				//PASSWORD FIELD
+				chrome.tabs.executeScript(null,{
+					code: 'Array.from(document.getElementsByTagName("input")).map(h => h.id)'
+				},
+				function (results){
+					for(var i=0; i<results[0].length; i++){
+						if(results[0][i] == "pass" || results[0][i] == "ap_password"){
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i] + '").value = "' + decryptedPass + '";'});
+						}
+					}
+				});
 				
+				//TODO: fix this!!
+				//SUBMIT BUTTON
+				chrome.tabs.executeScript(null,{
+					code: 'Array.from(document.getElementsByTagName("input")).map(h => h.id)'
+				},
+				function (results){
+					console.log(results);
+					for(var i=0; i<results[0].length; i++){
+						console.log(results[0][i]);
+						//i guess i need both of these "u_0_2" & "submit"? why, i dont know
+						if(results[0][i] == "u_0_3" || results[0][i] == "signInSubmit" || results[0][i] == "u_0_8"){
+							chrome.tabs.executeScript(tabs[0].id, {code: 'document.getElementById("' + results[0][i] + '").click();'});
+						}
+					}
+				});
+				*/
+				
+				
+				
+				
+				////////////////FIRST VERSION//////////////////
 				/*
 				//FACEBOOK
 				if(url == "https://www.facebook.com/"){
