@@ -20,12 +20,20 @@ function addCred(){
 	var masterUser = MU;
 	var masterPass = MP;
 	
-	var login = document.getElementById("loginURL").value;
-	var username = document.getElementById("newUser").value;
-	var passwordA = document.getElementById("newPass").value;
+	var url = chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
+		var url = tabs[0].url;
+		console.log("url:", url);
+		createCred(url);
+	});
 	
-	//encrypt with master password
-	var encryptedPass = CryptoJS.AES.encrypt(passwordA, masterPass);
-	
-	localStorage.setItem(login, [username, encryptedPass, masterUser]);
+	function createCred(url){
+		//var url = document.getElementById("loginURL").value;
+		var username = document.getElementById("newUser").value;
+		var passwordA = document.getElementById("newPass").value;
+		
+		//encrypt with master password
+		var encryptedPass = CryptoJS.AES.encrypt(passwordA, masterPass);
+		
+		localStorage.setItem(url, [username, encryptedPass, masterUser]);
+	}
 }
